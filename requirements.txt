@@ -1,0 +1,5 @@
+dify-plugin==0.10.2
+mcp==2.3.0
+httpx2==2.16.0
+certifi==2026.10.23
+gevent==26.9.0
