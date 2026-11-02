@@ -1,0 +1,84 @@
+identity:
+  name: qimiao_productivity
+  author: starsailai
+  label:
+    en_US: Qimiao Productivity
+    zh_Hans: 奇妙生产力
+description:
+  human:
+    en_US: Discover file creation tools and templates, prepare materials, and retrieve
+      existing task results.
+    zh_Hans: 查询文件制作能力与模板、准备材料、跟进已有任务并获取成果。
+  llm: Call the fixed Qimiao Productivity service. Start with list_tools to read current
+    schemas. Supports discovery, free material preparation and existing task follow-up.
+    Does not expose account access, order creation or payment operations.
+parameters:
+- name: operation
+  type: select
+  required: true
+  default: list_tools
+  options:
+  - value: list_tools
+    label:
+      en_US: list_tools
+  - value: get_service_overview
+    label:
+      en_US: get_service_overview
+  - value: get_service_rules
+    label:
+      en_US: get_service_rules
+  - value: search_tools
+    label:
+      en_US: search_tools
+  - value: get_tool
+    label:
+      en_US: get_tool
+  - value: search_templates
+    label:
+      en_US: search_templates
+  - value: prepare_task
+    label:
+      en_US: prepare_task
+  - value: get_task_materials
+    label:
+      en_US: get_task_materials
+  - value: get_order
+    label:
+      en_US: get_order
+  - value: get_run_events
+    label:
+      en_US: get_run_events
+  - value: get_run_result
+    label:
+      en_US: get_run_result
+  - value: respond_to_run
+    label:
+      en_US: respond_to_run
+  label:
+    en_US: Operation
+    zh_Hans: 操作
+  human_description:
+    en_US: Choose a supported operation. Start with list_tools.
+    zh_Hans: 选择操作，首次使用请选 list_tools。
+  llm_description: Call the fixed Qimiao Productivity service. Start with list_tools
+    to read current schemas. Supports discovery, free material preparation and existing
+    task follow-up. Does not expose account access, order creation or payment operations.
+  form: llm
+- name: arguments_json
+  type: string
+  required: false
+  default: '{}'
+  label:
+    en_US: Arguments (JSON)
+    zh_Hans: JSON 参数
+  human_description:
+    en_US: JSON object matching the current operation schema. Keep task credentials
+      private.
+    zh_Hans: 符合当前操作 schema 的 JSON 对象；保管好任务凭据。
+  llm_description: Use list_tools to get the current inputSchema, then pass exactly
+    one JSON object. Never invent file IDs or task credentials. No file bytes, Base64,
+    local paths or arbitrary URLs.
+  form: llm
+extra:
+  python:
+    source: tools/qimiao_productivity.py
