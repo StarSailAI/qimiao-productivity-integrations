@@ -1,19 +1,25 @@
 # Privacy policy
 
-This policy covers the Qimiao Productivity Dify integration, maintained by StarSailAI.
+This policy covers the Qimiao Productivity Dify integration maintained by StarSailAI.
 
-## Data sent
+## Data transmitted and purposes
 
-The plugin transmits the selected operation and its JSON arguments to `https://mcp.longxia.sale/mcp`. Depending on the selected operation, this can include search queries, template requirements, task requirements, draft or task identifiers, per-task access credentials, file identifiers and replies to a running task. The service can return private task state, upload links, download links and credentials. Users should supply only content they are authorized to process. Discovery does not require account credentials.
+The plugin transmits the selected operation and its JSON arguments over HTTPS to `https://mcp.longxia.sale/mcp` to discover services, prepare materials, create a service agreement/order, follow production and return files. Depending on the operation, inputs include search queries, requirements, template choices, source URLs allowed by the chosen service, draft/task/file identifiers, per-task access credentials, interaction replies, change requests and idempotency keys. Outputs can include private material summaries, task state, access/recovery credentials, upload links, checkout links and result/download links. Public discovery requires no Qimiao account or API key.
 
-## Storage and logging
+Optional account operations send the user-provided connection ID and connection credential to that same service. The returned account information can include masked identity, balance and grant state. `pay_with_balance` sends the service/contract references, account connection references, the exact confirmed amount/currency, and any applicable confirmation token to authorize that specific service-balance charge. This is financial and authentication data. Account linking alone is not consent to spend. Passwords, Alipay credentials, bank-card details and login verification codes are not requested by the plugin and must remain on the relevant first-party login/payment pages.
 
-The plugin has no persistent storage, analytics or logging of user arguments or task credentials. Values exist in memory for the bounded request. Dify can retain workflow inputs and outputs under the operator's Dify configuration and privacy policy (https://dify.ai/privacy). Do not publish workflow traces containing credentials. The Qimiao service stores submitted task data and artifacts under its current service rules; this plugin does not override retention or promise automatic deletion. Read `get_service_rules` before submitting private content. Contact support for current retention and deletion arrangements.
+## Storage, access and logging
 
-## Destinations and boundaries
+The plugin has no persistent storage, analytics or logging of user arguments, credentials or financial confirmations. Values exist in memory for the bounded invocation. **Dify can retain workflow inputs and outputs**, including credentials and private links, according to the workspace operator's configuration and privacy policy (https://dify.ai/privacy). Access to apps, traces and results must be restricted. Do not publish traces containing real user data, share account grants across unrelated users, or expose task credentials and owner-checkout links in public examples.
 
-Runtime MCP requests go only to `mcp.longxia.sale` over HTTPS, with redirects disabled. The user may separately open first-party links returned by the service. The plugin does not fetch those links or send data to an additional provider. File production, where used outside this plugin, can involve providers described by the remote service; do not submit confidential or sensitive content without reviewing those current arrangements. No user account connection, balance access, order creation or payment operation is exposed by this plugin.
+The Qimiao service stores submitted task data, billing records and artifacts under its current service rules. This client does not override retention or promise automatic deletion. Read `get_service_rules` and the selected tool's data arrangements before submitting sensitive content. Contact support for retention and deletion requests. Users can revoke an account connection through `disconnect_account` or the first-party account management interface; revocation does not imply deletion of billing records.
+
+## Destinations and external payments
+
+All runtime MCP calls go to `mcp.longxia.sale`, with verified TLS and redirects disabled. The plugin does not fetch checkout/upload/download URLs. Users may separately open the returned first-party Qimiao pages. Anonymous checkout does not require a Qimiao account; actual Alipay authentication and payment happen outside Dify through the first-party checkout and payment provider. Merchant keys remain on the Qimiao server and are not supplied to the plugin. Payment providers process transaction data under their own policies. The production service can use processing providers described by its live tool/service rules; this adapter does not make a local-only processing promise.
+
+The service's confirmed payment state is authoritative; a browser return URL does not prove payment. The adapter does not retry spending automatically or invent user consent. It exposes neither general money transfer nor a refund API. Billing disputes use the service's support procedure.
 
 ## Contact
 
-For access, privacy or deletion questions: xingfanai2026@163.com.
+For access, privacy, billing or deletion questions: xingfanai2026@163.com.

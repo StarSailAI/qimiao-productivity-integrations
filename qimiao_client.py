@@ -1,4 +1,9 @@
-"""Fixed-destination official MCP SDK client. No account or payment operations."""
+"""Fixed-service MCP adapter for discovery, production and authorized commerce.
+
+All account permissions, per-order confirmation, ownership, idempotency and
+billing checks remain enforced by the existing Qimiao service. This adapter
+does not infer consent, insert confirmation fields or retry write operations.
+"""
 import asyncio
 import json
 import ssl
@@ -9,7 +14,14 @@ from mcp import ClientSession
 from mcp.client.streamable_http import streamable_http_client
 
 ENDPOINT = "https://mcp.longxia.sale/mcp"
-ALLOWED = frozenset({"get_service_overview", "get_service_rules", "search_tools", "get_tool", "search_templates", "prepare_task", "get_task_materials", "get_order", "get_run_events", "get_run_result", "respond_to_run"})
+ALLOWED = frozenset({
+    "get_service_overview", "get_service_rules", "search_tools", "get_tool",
+    "search_templates", "prepare_task", "get_task_materials", "quote_order",
+    "renew_quote", "create_order", "get_order", "wait_order", "get_run_events",
+    "respond_to_run", "get_run_result", "request_change", "resume_order",
+    "cancel_order", "connect_account", "get_connected_account",
+    "disconnect_account", "pay_with_balance",
+})
 MAX_INPUT_BYTES = 1024 * 1024
 
 
@@ -49,7 +61,7 @@ def _run(operation, arguments):
 def invoke(operation, raw="{}"):
     # Validate before opening any network connection; never proxy an arbitrary tool.
     if not isinstance(operation, str) or operation not in ALLOWED | {"list_tools"}:
-        return {"isError": True, "error": "Unsupported operation. This plugin does not expose order, account or payment operations."}
+        return {"isError": True, "error": "Unsupported operation. Use list_tools for this plugin's supported operations."}
     try:
         arguments = parse_arguments(raw)
     except ValueError as error:
