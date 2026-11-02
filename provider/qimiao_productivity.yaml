@@ -5,9 +5,9 @@ identity:
     en_US: Qimiao Productivity
     zh_Hans: 奇妙生产力
   description:
-    en_US: Discover file creation tools and templates, prepare materials, and retrieve
-      existing task results.
-    zh_Hans: 查询文件制作能力与模板、准备材料、跟进已有任务并获取成果。
+    en_US: 'Create and process files with Qimiao: discover tools, prepare tasks, use
+      external checkout, track production and retrieve results.'
+    zh_Hans: Personal Agent 的办公生产力工具箱：发现能力、准备材料、确认订单、跟进制作并获取文件。
   icon: icon.png
   tags:
   - productivity
