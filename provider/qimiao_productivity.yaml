@@ -1,0 +1,21 @@
+identity:
+  author: starsailai
+  name: qimiao_productivity
+  label:
+    en_US: Qimiao Productivity
+    zh_Hans: 奇妙生产力
+  description:
+    en_US: Discover file creation tools and templates, prepare materials, and retrieve
+      existing task results.
+    zh_Hans: 查询文件制作能力与模板、准备材料、跟进已有任务并获取成果。
+  icon: icon.png
+  tags:
+  - productivity
+  - design
+  - utilities
+credentials_for_provider: {}
+tools:
+- tools/qimiao_productivity.yaml
+extra:
+  python:
+    source: provider/qimiao_productivity.py
